@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Mukitlist"
+rootProject.name = "Mukatlist"
 include(":app")
  
