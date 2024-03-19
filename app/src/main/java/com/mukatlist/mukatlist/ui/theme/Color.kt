@@ -19,8 +19,8 @@ import androidx.compose.ui.graphics.Color
 val Orange01 = Color(0xFFFE6A38)
 val OrangePink01 = Color(0xFFFC3D08)
 val Pink01 = Color(0xFFFF5454)
-
-
+val Color_Unelected = Color(0xFFB6B6B6)
+val Color_Selected = Color(0xFFFE6A38)
 
 
 
