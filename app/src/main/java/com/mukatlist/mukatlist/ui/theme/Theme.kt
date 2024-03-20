@@ -23,8 +23,8 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
+    primary = Orange01,
+    secondary = OrangePink01,
     tertiary = Pink40,
     background = Color.White
 
@@ -69,3 +69,4 @@ fun MukatlistTheme(
         content = content
     )
 }
+

@@ -16,7 +16,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import com.mukatlist.mukatlist.ui.theme.MukatlistTheme
-import org.intellij.lang.annotations.PrintFormat
 
 @Composable
 fun MukatlistApp() {

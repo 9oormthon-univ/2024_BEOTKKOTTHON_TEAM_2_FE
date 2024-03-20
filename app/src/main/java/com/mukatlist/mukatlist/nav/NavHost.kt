@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.mukatlist.mukatlist.data.BottomNavItems
+import com.mukatlist.mukatlist.data.TopNavItem
 import com.mukatlist.mukatlist.screen.CalendarScreen
 import com.mukatlist.mukatlist.screen.GroupMukatlistScreen
 import com.mukatlist.mukatlist.screen.MukatlistScreen
@@ -31,9 +32,9 @@ fun Navigation(navController: NavHostController) {
         }
     }
 
-//    NavHost(navController = navController, startDestination = TopNavItem.Top.route) {
-//        composable(TopNavItem.Top.route) {
-//            MukatlistScreen()
-//        }
-//    }
+    NavHost(navController = navController, startDestination = TopNavItem.Top.route) {
+        composable(TopNavItem.Top.route) {
+            MukatlistScreen()
+        }
+   }
 }

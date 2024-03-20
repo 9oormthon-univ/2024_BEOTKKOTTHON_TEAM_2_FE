@@ -21,7 +21,7 @@ val OrangePink01 = Color(0xFFFC3D08)
 val Pink01 = Color(0xFFFF5454)
 val Color_Unelected = Color(0xFFB6B6B6)
 val Color_Selected = Color(0xFFFE6A38)
-
+val Search_Bar = Color(0xFFF1F1F1)
 
 
 //Dark Mode (아직 지원 미정)

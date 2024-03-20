@@ -26,40 +26,40 @@ import com.mukatlist.mukatlist.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class IntroSplashFragment: Fragment(R.layout.fragment_intro_splash) {
-    private val neededPermission = android.Manifest.permission.READ_EXTERNAL_STORAGE
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        lifecycleScope.launch {
-            delay(1000)
-            checkPermissions()
-            listenToFragmentResultListeners()
-        }
-    }
-
-    private fun checkPermissions(){
-        when (PackageManager.PERMISSION_GRANTED){
-            ContextCompat.checkSelfPermission(
-                requireContext(),
-                neededPermission
-            ) -> navigationToIntroTermAgreementScreen()
-            else -> navigationToCheckPermissioiinDialogScreen()
-        }
-    }
-
-    private fun listenToFragmentResultListeners(){
-        setFragmentResultListener(requestKey = REQUEST_KEY_PERMISSION_CHECK_READ_EXTERNAL_STORAGE){
-            requestKey, _ -> require(requestKey == REQUEST_KEY_PERMISSION_CHECK_READ_EXTERNAL_STORAGE)
-            navigationToIntroTermAgreementScreen()
-        }
-    }
-
-    private fun navigationToCheckPermissioiinDialogScreen(){
-        findNavController().navigate(resId = R.id.action_introSplashFragment_to_introTermAgreementFragment)
-    }
-
-    private fun navigationToIntroTermAgreementScreen(){
-        findNavController().navigate(resId = R.id.action_introSplashFragment_to_checkPermissionsDialogFragment)
-    }
-}
+//class IntroSplashFragment: Fragment(R.layout.fragment_intro_splash) {
+//    private val neededPermission = android.Manifest.permission.READ_EXTERNAL_STORAGE
+//
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        lifecycleScope.launch {
+//            delay(1000)
+//            checkPermissions()
+//            listenToFragmentResultListeners()
+//        }
+//    }
+//
+//    private fun checkPermissions(){
+//        when (PackageManager.PERMISSION_GRANTED){
+//            ContextCompat.checkSelfPermission(
+//                requireContext(),
+//                neededPermission
+//            ) -> navigationToIntroTermAgreementScreen()
+//            else -> navigationToCheckPermissioiinDialogScreen()
+//        }
+//    }
+//
+//    private fun listenToFragmentResultListeners(){
+//        setFragmentResultListener(requestKey = REQUEST_KEY_PERMISSION_CHECK_READ_EXTERNAL_STORAGE){
+//            requestKey, _ -> require(requestKey == REQUEST_KEY_PERMISSION_CHECK_READ_EXTERNAL_STORAGE)
+//            navigationToIntroTermAgreementScreen()
+//        }
+//    }
+//
+//    private fun navigationToCheckPermissioiinDialogScreen(){
+//        findNavController().navigate(resId = R.id.action_introSplashFragment_to_introTermAgreementFragment)
+//    }
+//
+//    private fun navigationToIntroTermAgreementScreen(){
+//        findNavController().navigate(resId = R.id.action_introSplashFragment_to_checkPermissionsDialogFragment)
+//    }
+//}
