@@ -27,9 +27,9 @@ class LoginActivity: MainActivity() {
     @Composable
     fun runUI(){
         MukatlistTheme{
-            Log.e(TAG, "intro 실행")
+            Log.e(TAG, "LoginScreen 실행")
             LoginScreen()
-            Log.e(TAG, "intro 종료")
+            Log.e(TAG, "LoginScreen 종료")
         }
     }
 

@@ -108,6 +108,7 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
 
     // kakao Login
+    implementation("com.kakao.sdk:v2-all:2.20.0")
     implementation("com.kakao.sdk:v2-common:2.20.0")
     implementation("com.kakao.sdk:v2-user:2.20.0")
     implementation("com.kakao.sdk:v2-auth:2.20.0")

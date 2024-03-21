@@ -21,8 +21,6 @@ open class MainActivity : ComponentActivity() {
         //val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
-        KakaoSdk.init(this, "kakao6368a6f2f7c829fb4de02e5ff439e2cb")
-
         setContent{
             LoginActivity().runUI()
             Log.d(TAG, "onCreate runUI 실행")

@@ -1,14 +1,13 @@
 package com.mukatlist.mukatlist
 
 import android.app.Application
-import androidx.work.Configuration
-import com.kakao.sdk.v2.auth.BuildConfig
-import dagger.hilt.android.HiltAndroidApp
+import com.kakao.sdk.common.KakaoSdk
 
-@HiltAndroidApp
-class MainApplication : Application(), Configuration.Provider {
-    override val workManagerConfiguration: Configuration
-        get() = Configuration.Builder()
-            .setMinimumLoggingLevel(if (BuildConfig.DEBUG) android.util.Log.DEBUG else android.util.Log.ERROR)
-            .build()
+
+class MainApplication : Application(){
+    override fun onCreate() {
+        super.onCreate()
+        // Kakao SDK 초기화
+        KakaoSdk.init(this, "kakao6368a6f2f7c829fb4de02e5ff439e2cb")
+    }
 }

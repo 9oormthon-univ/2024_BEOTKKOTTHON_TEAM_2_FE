@@ -2,5 +2,7 @@
 <resources>
 
     <style name="Theme.Mukatlist" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 </resources>

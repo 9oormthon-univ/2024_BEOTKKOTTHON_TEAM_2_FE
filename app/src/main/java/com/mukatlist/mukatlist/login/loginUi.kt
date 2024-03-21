@@ -1,5 +1,7 @@
 package com.mukatlist.mukatlist.login
 
+import android.content.ContentValues
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -73,9 +75,10 @@ fun button_kakaotalk(){
         contentPadding = PaddingValues(start = 90.dp, end = 90.dp, top = 10.dp, bottom = 10.dp),
         modifier = androidx.compose.ui.Modifier.wrapContentSize(),
         onClick = {
-            coroutineScope.launch{
-                LoginActivity().login()
-            }
+            Log.e(ContentValues.TAG, "click")
+
+            LoginActivity().login()
+
         }
     ) {
         Image(painter = painterResource(R.drawable. ic_share_kakaotalk), contentDescription = null)
