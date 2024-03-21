@@ -16,6 +16,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -26,10 +27,11 @@ import com.mukatlist.mukatlist.LoginActivity
 import com.mukatlist.mukatlist.R
 import com.mukatlist.mukatlist.ui.theme.MukatlistTheme
 import com.mukatlist.mukatlist.ui.theme.Orange01
+import kotlinx.coroutines.launch
 
 
 @Composable
-fun intro(){
+fun LoginScreen(){
     Row (modifier = androidx.compose.ui.Modifier.fillMaxSize(),
         verticalAlignment = Alignment.CenterVertically
     ){
@@ -63,13 +65,17 @@ fun logo(){
 
 @Composable
 fun button_kakaotalk(){
+    val coroutineScope = rememberCoroutineScope()
+
     Button(
         shape = RoundedCornerShape(10.dp),
         colors = ButtonDefaults.buttonColors(Orange01),
         contentPadding = PaddingValues(start = 90.dp, end = 90.dp, top = 10.dp, bottom = 10.dp),
         modifier = androidx.compose.ui.Modifier.wrapContentSize(),
         onClick = {
-            LoginActivity().login()
+            coroutineScope.launch{
+                LoginActivity().login()
+            }
         }
     ) {
         Image(painter = painterResource(R.drawable. ic_share_kakaotalk), contentDescription = null)
@@ -80,9 +86,9 @@ fun button_kakaotalk(){
 
 @Preview(showBackground = true)
 @Composable
-internal fun introPreview(){
+internal fun LoginScreenPreview(){
     MukatlistTheme{
-        intro()
+        LoginScreen()
     }
 }
 

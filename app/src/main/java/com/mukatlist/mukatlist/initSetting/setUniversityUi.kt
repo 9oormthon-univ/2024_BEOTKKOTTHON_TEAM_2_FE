@@ -1,6 +1,7 @@
 package com.mukatlist.mukatlist.initSetting
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,7 +28,9 @@ import com.mukatlist.mukatlist.ui.theme.Color_Unelected
 @Composable
 fun set_university(){
     Row(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = Color.White),
         verticalAlignment = Alignment.CenterVertically
     )
     {
@@ -58,7 +62,7 @@ fun button_search_university(){
         colors = ButtonDefaults.buttonColors(Orange01),
         modifier = Modifier.fillMaxWidth(),
         onClick = {
-            /*do something*/
+            /*TODO*/
         }
     ) {
         Text(text = "대학교 검색")

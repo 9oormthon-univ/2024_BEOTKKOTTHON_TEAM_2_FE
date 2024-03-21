@@ -26,9 +26,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -37,13 +39,16 @@ import com.mukatlist.mukatlist.ui.theme.MukatlistTheme
 import com.mukatlist.mukatlist.R
 import com.mukatlist.mukatlist.ui.theme.Color_Unelected
 import com.mukatlist.mukatlist.ui.theme.Orange01
+import com.mukatlist.mukatlist.ui.theme.font_pt
 
 @Composable
 fun profile(){
     var textState by remember { mutableStateOf("") }
 
-    Row(modifier = Modifier.fillMaxSize(),
-        verticalAlignment = Alignment.CenterVertically) {
+    Row(modifier = Modifier
+        .fillMaxSize()
+        .background(color = Color.White),
+        verticalAlignment = Alignment.CenterVertically,) {
         Column (
             modifier = Modifier
                 .fillMaxWidth()
@@ -90,7 +95,7 @@ fun profile_textfield(){
 
     BasicTextField(
         value = textState,
-        onValueChange = {if (it.length > 15) textState else textState = it},
+        onValueChange = {if (it.length > 10) textState else textState = it},
         textStyle = TextStyle(fontSize = 20.sp, textAlign = TextAlign.Center),
         decorationBox = {innerTextField ->
             Column (modifier = Modifier
@@ -107,6 +112,9 @@ fun profile_textfield(){
                     if(textState.isEmpty())
                         Text(
                             text = "이름을 입력해주세요.",
+                            fontFamily = font_pt,
+                            fontWeight = FontWeight.Light,
+                            fontSize = 13.sp,
                             color = Color_Unelected,
                             textAlign= TextAlign.Center,
                             modifier = Modifier.fillMaxWidth()
@@ -126,7 +134,7 @@ fun button_ok(){
         colors = ButtonDefaults.buttonColors(Orange01),
         modifier = Modifier.fillMaxWidth(),
         onClick = {
-            /*do something*/
+            /*TODO*/
         }
     ) {
         Text(text = "확인")

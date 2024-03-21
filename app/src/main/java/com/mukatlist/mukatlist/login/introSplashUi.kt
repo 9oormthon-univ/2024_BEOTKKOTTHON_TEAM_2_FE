@@ -29,10 +29,10 @@ fun profile(){
 }
 
 
-@Preview(showBackground = true)
-@Composable
-internal fun setProfileUiPreview(){
-    MukatlistTheme{
-        profile()
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//internal fun setProfileUiPreview(){
+//    MukatlistTheme{
+//        profile()
+//    }
+//}

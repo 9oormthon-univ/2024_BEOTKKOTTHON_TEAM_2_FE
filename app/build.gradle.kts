@@ -57,7 +57,7 @@ dependencies {
     implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
 
     // splash
-    implementation("androidx.core:core-splashscreen:1.0.1")
+    //implementation("androidx.core:core-splashscreen:1.0.1")
 
     // coroutine
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
@@ -76,6 +76,7 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.work.runtime.ktx)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
@@ -107,5 +108,11 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
 
     // kakao Login
-    implementation("com.kakao.sdk:v2-user:2.10.0")
+    implementation("com.kakao.sdk:v2-common:2.20.0")
+    implementation("com.kakao.sdk:v2-user:2.20.0")
+    implementation("com.kakao.sdk:v2-auth:2.20.0")
+    implementation("com.kakao.sdk:v2-share:2.20.0")
+
+    // hilt
+    implementation ("com.google.dagger:hilt-android:2.38.1")
 }

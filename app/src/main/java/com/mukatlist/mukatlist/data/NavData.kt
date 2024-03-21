@@ -22,8 +22,26 @@ sealed class BottomNavItems(
 }
 
 sealed class TopNavItem(
-    val university: String,
+    //val university: String = isNull(userData.user.getUniversity_data()),
     val route: String
 ){
-    object Top: TopNavItem(userData.user.getUniversity_data(), MUKATLIST)
+//    fun getUniversity(): String {
+//        return university
+//    }
+
+    //isNull(userData.user.getUniversity_data()) ,
+    object Top: TopNavItem(MUKATLIST)
+}
+
+sealed class Top_MypageNavItem(
+    val route: String
+){
+    object Top: Top_MypageNavItem(MUKATLIST)
+}
+
+fun isNull(string: String?): String{
+    if(string == null)
+        return "null"
+    else
+        return string
 }

@@ -15,12 +15,12 @@ class PreferenceUtil(context: Context){
         prefs.edit().putString(key, university).apply()
     }
 
-    fun getName(): String{
-        return prefs.getString("Name", "?").toString()
+    fun getName(): String?{
+        return prefs.getString("Name", "")
     }
 
-    fun getUniversity(): String{
-        return prefs.getString("University", "?").toString()
+    fun getUniversity(): String?{
+        return prefs.getString("University", "")
     }
 
 }
