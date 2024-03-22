@@ -16,7 +16,6 @@ import com.mukatlist.mukatlist.initSetting.search_university
 import com.mukatlist.mukatlist.initSetting.set_university
 import com.mukatlist.mukatlist.login.LoginScreen
 import com.mukatlist.mukatlist.screen.CalendarScreen
-import com.mukatlist.mukatlist.screen.GroupMukatlistScreen
 import com.mukatlist.mukatlist.screen.MukatlistScreen
 import com.mukatlist.mukatlist.screen.MyPageScreen
 import com.mukatlist.mukatlist.screen.SearchMusteatScreen

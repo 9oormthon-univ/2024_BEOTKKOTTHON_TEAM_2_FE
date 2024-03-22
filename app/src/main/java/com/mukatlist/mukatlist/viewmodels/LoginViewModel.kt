@@ -40,8 +40,8 @@ class LoginViewModel: ViewModel(){
                 getLastSignedInAccount(context)
             }
             delay(2500)
-            // 계정 확인: 있음 -> true, 없음 -> false 반환
 
+            // 계정 확인: 있음 -> true, 없음 -> false 반환
             setLoginResult(account.await() != null)
         }
     }

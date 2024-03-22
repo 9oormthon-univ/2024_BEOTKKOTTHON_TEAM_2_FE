@@ -57,6 +57,9 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.5.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
+    // splash
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
     // coroutine
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
@@ -122,5 +125,5 @@ dependencies {
 
 
     // web view
-    implementation("com.google.accompanist:accompanist-webview:0.24.13-rc")
+    implementation( "com.google.accompanist:accompanist-webview:0.24.13-rc")
 }

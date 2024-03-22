@@ -1,6 +1,5 @@
 package com.mukatlist.mukatlist.login
 
-
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,7 +14,7 @@ import com.mukatlist.mukatlist.ui.theme.MukatlistTheme
 import java.lang.reflect.Modifier
 
 @Composable
-fun profile(){
+fun SplashScreen(){
     Row (modifier = androidx.compose.ui.Modifier.fillMaxSize(),
         verticalAlignment = Alignment.CenterVertically
     ){
@@ -29,10 +28,10 @@ fun profile(){
 }
 
 
-//@Preview(showBackground = true)
-//@Composable
-//internal fun setProfileUiPreview(){
-//    MukatlistTheme{
-//        profile()
-//    }
-//}
+@Preview(showBackground = true)
+@Composable
+internal fun setProfileUiPreview(){
+    MukatlistTheme{
+        SplashScreen()
+    }
+}
