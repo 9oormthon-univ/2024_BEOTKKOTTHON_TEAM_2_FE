@@ -14,6 +14,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import com.mukatlist.mukatlist.nav.Navigation_Bottom
+import com.mukatlist.mukatlist.ui.theme.MUKATLIST
 import com.mukatlist.mukatlist.ui.theme.MukatlistTheme
 
 @Composable
@@ -28,17 +29,7 @@ fun MukatlistApp() {
 fun mukatNavi(
     navController: NavHostController
 ){
-    val activity = (LocalContext.current as Activity)
-
     Scaffold(
-
-//        topBar = {
-//            TopNavigationBar(
-//                navController = navController,
-//                onItemClick = {
-//                    navController.navigate(it.route)
-//                })
-//        },
         bottomBar = {
             BottomNavigationBar(
                 items = items,
@@ -54,7 +45,7 @@ fun mukatNavi(
                     .padding(it)
             )
             {
-                Navigation_Bottom(navController = navController)
+                Navigation_Bottom(navController = navController, MUKATLIST)
             }
         }
     )

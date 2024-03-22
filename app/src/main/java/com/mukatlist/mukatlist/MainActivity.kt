@@ -1,45 +1,63 @@
 package com.mukatlist.mukatlist
 
 import android.content.ContentValues.TAG
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.kakao.sdk.common.KakaoSdk
-import com.mukatlist.mukatlist.ui.theme.MukatlistTheme
-import com.mukatlist.mukatlist.utils.PreferenceUtil
-import com.mukatlist.mukatlist.utils.MukatlistApp
-import dagger.hilt.android.AndroidEntryPoint
+import androidx.activity.viewModels
+import androidx.compose.material.Surface
+import androidx.compose.material3.Text
+import androidx.lifecycle.lifecycleScope
+import com.google.firebase.auth.FirebaseAuth
+import com.mukatlist.mukatlist.viewmodels.LoginViewModel
+import kotlinx.coroutines.flow.first
 
-@AndroidEntryPoint
+
 open class MainActivity : ComponentActivity() {
-    companion object{
-        lateinit var prefs: PreferenceUtil
-    }
 
+    private val viewModel by viewModels<LoginViewModel>()
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    
     override fun onCreate(savedInstanceState: Bundle?) {
-        //val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
-        setContent{
-            LoginActivity().runUI()
-            Log.d(TAG, "onCreate runUI 실행")
-        }
-    }
+        var sharedPreferences: SharedPreferences? = null
+        var editor = sharedPreferences?.edit()
 
-    fun onStart(savedInstanceState: Bundle?) {
-        super.onStart()
-        setContent{
-            if( prefs.getName() != null && prefs.getUniversity() != null){
+        // 로그인 시도
+        viewModel.tryLogin(this)
 
-                MukatlistTheme {
-                    Log.d(TAG, "onStart MukatlistApp 실행")
-                    MukatlistApp()
+        lifecycleScope.launchWhenCreated {
+            viewModel.loginResult.collect { isLogin ->
+                Log.e(TAG, "로그인 정보: $isLogin")
+                val text_name = MainApplication.getInstance().getDataStore().text_name.first()
+                val text_uni = MainApplication.getInstance().getDataStore().text_uni.first()
+                Log.e(TAG, "text_name = $text_name")
+                Log.e(TAG, "text_uni = $text_uni")
+
+
+                if (isLogin && text_name != "" && text_uni != "") {
+                    if (auth.currentUser != null) {
+                        Log.e(TAG, "로그인 O")
+                        startActivity(Intent(this@MainActivity, HomeActivity::class.java))
+                    }
+                } else {
+                    sharedPreferences = getSharedPreferences("", Context.MODE_PRIVATE)
+                    editor = sharedPreferences?.edit()
+                    // 로그인 안되어있을 때 로그인 페이지 열림
+                    Log.e(TAG, "로그인 X")
+                    startActivity(Intent(this@MainActivity, LoginActivity::class.java))
                 }
             }
-            else {
-                LoginActivity().runUI()
-                Log.d(TAG, "onStart runUI 실행")
+        }
+        
+        setContent{
+            Surface {
+                Text(text = "로그인 확인중")
             }
         }
     }

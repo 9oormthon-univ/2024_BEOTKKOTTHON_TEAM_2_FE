@@ -34,11 +34,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.mukatlist.mukatlist.MainApplication
 import com.mukatlist.mukatlist.data.TopNavItem
 import com.mukatlist.mukatlist.data.Top_MypageNavItem
-import com.mukatlist.mukatlist.data.userData
 import com.mukatlist.mukatlist.ui.theme.MukatlistTheme
 import com.mukatlist.mukatlist.ui.theme.font_pt
+import kotlinx.coroutines.flow.first
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -59,7 +60,7 @@ fun NomalTopNavigationBar(
                         )
                     ){
                         //TopNavItem.Top.getUniversity()
-                        append(userData.user.getUniversity_data())
+                        //append(MainApplication.getInstance().getDataStore().text_name.toString())
                     }
                 },
             )

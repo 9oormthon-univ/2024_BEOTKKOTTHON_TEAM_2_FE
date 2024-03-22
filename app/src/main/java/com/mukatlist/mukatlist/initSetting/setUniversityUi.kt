@@ -19,14 +19,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.mukatlist.mukatlist.ui.theme.MukatlistTheme
 import com.mukatlist.mukatlist.ui.theme.Orange01
 import com.mukatlist.mukatlist.R
 import com.mukatlist.mukatlist.ui.theme.Color_Unelected
+import com.mukatlist.mukatlist.ui.theme.SEARCHUNIVERSITY
 
 
 @Composable
-fun set_university(){
+fun set_university(
+    navController: NavHostController
+){
     Row(
         modifier = Modifier
             .fillMaxSize()
@@ -50,22 +54,23 @@ fun set_university(){
                 color = Color_Unelected,
                 modifier = Modifier.padding(top = 10.dp, bottom = 10.dp)
             )
-            button_search_university()
+            Button(
+                shape = RoundedCornerShape(10.dp),
+                colors = ButtonDefaults.buttonColors(Orange01),
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
+                    navController.navigate(SEARCHUNIVERSITY) {
+                        navController.graph.startDestinationRoute?.let {
+                            popUpTo(it) { saveState = true }
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                }
+            ) {
+                Text(text = "대학교 검색")
+            }
         }
-    }
-}
-
-@Composable
-fun button_search_university(){
-    Button(
-        shape = RoundedCornerShape(10.dp),
-        colors = ButtonDefaults.buttonColors(Orange01),
-        modifier = Modifier.fillMaxWidth(),
-        onClick = {
-            /*TODO*/
-        }
-    ) {
-        Text(text = "대학교 검색")
     }
 }
 
@@ -73,6 +78,6 @@ fun button_search_university(){
 @Composable
 internal fun set_university_preview(){
     MukatlistTheme{
-        set_university()
+        //set_university()
     }
 }

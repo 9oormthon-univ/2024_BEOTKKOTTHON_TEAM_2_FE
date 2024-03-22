@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -53,11 +54,8 @@ android {
 dependencies {
 
     implementation(libs.androidx.core.ktx)
-    implementation ("androidx.appcompat:appcompat:1.5.1")
-    implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
-
-    // splash
-    //implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation("androidx.appcompat:appcompat:1.5.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
     // coroutine
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
@@ -76,12 +74,11 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.work.runtime.ktx)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
     // junit
-    androidTestImplementation ("androidx.test.ext:junit:1.1.4")
+    androidTestImplementation("androidx.test.ext:junit:1.1.4")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.ui.test.junit4)
@@ -89,15 +86,15 @@ dependencies {
     // espresso
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
 
     // lifecycle
     val lifecycle_version = "2.6.0-alpha03"
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
     // ViewModel
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
-    implementation ("androidx.fragment:fragment-ktx:1.5.4")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    implementation("androidx.fragment:fragment-ktx:1.5.4")
 
     // Jetpack Navigation
     val nav_version = "2.5.3"
@@ -107,13 +104,23 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
 
-    // kakao Login
-    implementation("com.kakao.sdk:v2-all:2.20.0")
-    implementation("com.kakao.sdk:v2-common:2.20.0")
-    implementation("com.kakao.sdk:v2-user:2.20.0")
-    implementation("com.kakao.sdk:v2-auth:2.20.0")
-    implementation("com.kakao.sdk:v2-share:2.20.0")
+    // Google Play services
+    implementation("com.google.gms:google-services:3.1.0")
+    implementation("com.google.firebase:firebase-auth:22.3.1")
+    implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
+    implementation("com.google.android.gms:play-services-auth:21.0.0")
 
-    // hilt
-    implementation ("com.google.dagger:hilt-android:2.38.1")
+    //val springfox_swagger = "1.1.1"
+    // Swagger
+    //implementation("io.springfox:springfox-swagger2:${springfox_swagger}")
+
+    implementation ("androidx.datastore:datastore-preferences:1.0.0")
+    // optional - RxJava2 support
+    implementation ("androidx.datastore:datastore-preferences-rxjava2:1.0.0")
+    // optional - RxJava3 support
+    implementation ("androidx.datastore:datastore-preferences-rxjava3:1.0.0")
+
+
+    // web view
+    implementation("com.google.accompanist:accompanist-webview:0.24.13-rc")
 }

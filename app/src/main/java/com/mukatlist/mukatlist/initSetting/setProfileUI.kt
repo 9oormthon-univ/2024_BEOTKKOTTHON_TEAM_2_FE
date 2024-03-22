@@ -1,5 +1,11 @@
 package com.mukatlist.mukatlist.initSetting
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -28,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -35,15 +42,31 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.mukatlist.mukatlist.MainActivity
+import com.mukatlist.mukatlist.MainApplication
 import com.mukatlist.mukatlist.ui.theme.MukatlistTheme
 import com.mukatlist.mukatlist.R
 import com.mukatlist.mukatlist.ui.theme.Color_Unelected
 import com.mukatlist.mukatlist.ui.theme.Orange01
+import com.mukatlist.mukatlist.ui.theme.SEARCHUNIVERSITY
+import com.mukatlist.mukatlist.ui.theme.SETUNIVERSITY
 import com.mukatlist.mukatlist.ui.theme.font_pt
+import com.mukatlist.mukatlist.viewmodels.SignInViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Composable
-fun profile(){
+fun profile(
+    navController: NavHostController
+){
     var textState by remember { mutableStateOf("") }
+
+    var imageUri by remember {
+        mutableStateOf<Uri?>(null)
+    }
 
     Row(modifier = Modifier
         .fillMaxSize()
@@ -57,8 +80,62 @@ fun profile(){
         ){
             Text(text = "프로필 설정")
             gallery()
-            profile_textfield()
-            button_ok()
+
+            // -------------------------------------------------------------------------
+
+            BasicTextField(
+                value = textState,
+                onValueChange = {if (it.length > 10) textState else textState = it},
+                textStyle = TextStyle(fontSize = 20.sp, textAlign = TextAlign.Center),
+                decorationBox = {innerTextField ->
+                    Column (modifier = Modifier
+                        .border(
+                            width = 1.dp,
+                            color = Color_Unelected,
+                            shape = RoundedCornerShape(size = 20.dp)
+                        )
+                        .fillMaxWidth()
+                        .padding(all = 10.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Box(modifier = Modifier.wrapContentSize()){
+                            if(textState.isEmpty())
+                                Text(
+                                    text = "이름을 입력해주세요.",
+                                    fontFamily = font_pt,
+                                    fontWeight = FontWeight.Light,
+                                    fontSize = 13.sp,
+                                    color = Color_Unelected,
+                                    textAlign= TextAlign.Center,
+                                    modifier = Modifier.fillMaxWidth()
+                                )
+                            innerTextField()
+                        }
+                    }
+                },
+                modifier = Modifier.padding(bottom = 3.dp)
+            )
+
+            // -------------------------------------------------------------------------
+            Button(
+                shape = RoundedCornerShape(10.dp),
+                colors = ButtonDefaults.buttonColors(Orange01),
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
+                    CoroutineScope(Dispatchers.IO).launch {
+                        MainApplication.getInstance().getDataStore().setText_name(textState)
+                    }
+                    navController.navigate(SETUNIVERSITY) {
+                        navController.graph.startDestinationRoute?.let {
+                            popUpTo(it) { saveState = true }
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                }
+            ) {
+                Text(text = "확인")
+            }
         }
     }
 }
@@ -91,60 +168,14 @@ fun gallery(){
 
 @Composable
 fun profile_textfield(){
-    var textState by remember { mutableStateOf("") }
 
-    BasicTextField(
-        value = textState,
-        onValueChange = {if (it.length > 10) textState else textState = it},
-        textStyle = TextStyle(fontSize = 20.sp, textAlign = TextAlign.Center),
-        decorationBox = {innerTextField ->
-            Column (modifier = Modifier
-                .border(
-                    width = 1.dp,
-                    color = Color_Unelected,
-                    shape = RoundedCornerShape(size = 20.dp)
-                )
-                .fillMaxWidth()
-                .padding(all = 10.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Box(modifier = Modifier.wrapContentSize()){
-                    if(textState.isEmpty())
-                        Text(
-                            text = "이름을 입력해주세요.",
-                            fontFamily = font_pt,
-                            fontWeight = FontWeight.Light,
-                            fontSize = 13.sp,
-                            color = Color_Unelected,
-                            textAlign= TextAlign.Center,
-                            modifier = Modifier.fillMaxWidth()
-                        )
-                    innerTextField()
-                }
-            }
-        },
-        modifier = Modifier.padding(bottom = 3.dp)
-    )
-}
-
-@Composable
-fun button_ok(){
-    Button(
-        shape = RoundedCornerShape(10.dp),
-        colors = ButtonDefaults.buttonColors(Orange01),
-        modifier = Modifier.fillMaxWidth(),
-        onClick = {
-            /*TODO*/
-        }
-    ) {
-        Text(text = "확인")
-    }
 }
 
 @Preview(showBackground = true)
 @Composable
 internal fun setprofile_Preview(){
+    //val navController = NavHostController
     MukatlistTheme{
-        profile()
+        //profile()
     }
 }

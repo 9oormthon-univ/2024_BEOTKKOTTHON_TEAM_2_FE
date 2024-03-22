@@ -29,7 +29,6 @@ import com.mukatlist.mukatlist.ui.theme.MukatlistTheme
 
 val items = listOf<BottomNavItems>(
     BottomNavItems.Mukatlist,
-    BottomNavItems.GroupMukatlist,
     BottomNavItems.SearchMusteat,
     BottomNavItems.Calendar,
     BottomNavItems.MyPage
@@ -104,7 +103,8 @@ fun BottomNavigationBar(
                         }
                         launchSingleTop = true
                         restoreState = true
-                    } }
+                    }
+                }
             )
         }
     }
