@@ -1,25 +1,19 @@
 package com.mukatlist.mukatlist.viewmodels
 
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.util.Log
-import androidx.activity.result.ActivityResult
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.common.api.Scope
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
-import com.mukatlist.mukatlist.R
-import com.mukatlist.mukatlist.login.LoginScreen
-import com.mukatlist.mukatlist.ui.theme.MukatlistTheme
-import com.mukatlist.mukatlist.utils.MukatlistApp
+import com.google.firebase.auth.FirebaseUser
+import com.mukatlist.mukatlist.MainApplication
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -35,13 +29,30 @@ class LoginViewModel: ViewModel(){
     val isFailState: State<Boolean> = _isFailState
 
     fun tryLogin(context: Context) {
+        Log.e(TAG, "tryLogin")
+
         viewModelScope.launch {
+            Log.e(TAG, "viewModelScope")
+
             val account = this.async {
                 getLastSignedInAccount(context)
             }
-            delay(2500)
+            Log.e(TAG, "account = $account")
+
+            delay(1000)
 
             // 계정 확인: 있음 -> true, 없음 -> false 반환
+            if (account.await() != null) {
+                CoroutineScope(Dispatchers.IO).launch {
+                    var currentFirebaseUser: FirebaseUser?  = FirebaseAuth.getInstance().getCurrentUser()
+                    val currentuser = currentFirebaseUser?.uid
+                    Log.e(TAG, " account: $currentuser")
+
+                    MainApplication.getInstance().getDataStore().setText_userID(currentuser.toString())
+                }
+            }
+            else
+                Log.e(TAG, "account.await()")
             setLoginResult(account.await() != null)
         }
     }
@@ -52,12 +63,8 @@ class LoginViewModel: ViewModel(){
     private fun setLoginResult(isLogin: Boolean) {
         viewModelScope.launch {
             _loginResult.emit(isLogin)
-            Log.e(ContentValues.TAG, "setLoginResult: $isLogin")
+            Log.e(TAG, "setLoginResult: $isLogin")
 
         }
-    }
-
-    fun requestUserData(){
-
     }
 }

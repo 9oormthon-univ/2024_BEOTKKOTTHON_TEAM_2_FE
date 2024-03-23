@@ -32,6 +32,10 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.mukatlist.mukatlist.login.LoginScreen
 import androidx.compose.runtime.*
+import com.mukatlist.mukatlist.initSetting.check_Uni
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class LoginActivity : ComponentActivity(), View.OnClickListener {
@@ -39,6 +43,7 @@ class LoginActivity : ComponentActivity(), View.OnClickListener {
     private lateinit var googleSignInClient: GoogleSignInClient
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val RC_SIGN_IN = 9001
+    lateinit var currentuser: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,9 +88,7 @@ class LoginActivity : ComponentActivity(), View.OnClickListener {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val account = task.getResult(ApiException::class.java)
-
                 Log.e(ContentValues.TAG, "onActivityResult: $account")
-
                 firebaseAuthWithGoogle(account)
             } catch (e: ApiException) {
                 Log.e(ContentValues.TAG, "$e")
@@ -110,7 +113,12 @@ class LoginActivity : ComponentActivity(), View.OnClickListener {
 
     fun toMainActivity(user: FirebaseUser?) {
         Log.e(ContentValues.TAG, "toMainActivity")
-
+        CoroutineScope(Dispatchers.IO).launch {
+            var currentFirebaseUser: FirebaseUser?  = FirebaseAuth.getInstance().getCurrentUser()
+            val currentuser = currentFirebaseUser?.uid
+            Log.e(ContentValues.TAG, "ID: $currentuser")
+            MainApplication.getInstance().getDataStore().setText_userID(currentuser.toString())
+        }
         if (user != null) {
             startActivity(Intent(this, SignInActivity::class.java))
         }

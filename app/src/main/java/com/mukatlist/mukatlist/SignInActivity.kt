@@ -1,6 +1,7 @@
 package com.mukatlist.mukatlist
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -37,24 +38,26 @@ class SignInActivity: ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            run()
+            run(this)
         }
 
     }
 }
 
 @Composable
-fun run(){
+fun run(context: Context){
     val navController = rememberNavController()
     SignIn(
-        navController = navController
+        navController = navController,
+        context
     )
 }
 
 
 @Composable
 fun SignIn(
-    navController: NavHostController
+    navController: NavHostController,
+    context: Context
 ){
     val activity = (LocalContext.current as Activity)
 
@@ -66,7 +69,7 @@ fun SignIn(
                     .padding(it)
             )
             {
-                Navigation_Bottom(navController = navController, SETNAME)
+                Navigation_Bottom(navController = navController, SETNAME, context)
             }
         }
     )

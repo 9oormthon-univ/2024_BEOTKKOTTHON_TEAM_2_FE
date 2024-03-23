@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.net.Uri
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -60,7 +61,8 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun profile(
-    navController: NavHostController
+    navController: NavHostController,
+    context: Context
 ){
     var textState by remember { mutableStateOf("") }
 
@@ -122,19 +124,29 @@ fun profile(
                 colors = ButtonDefaults.buttonColors(Orange01),
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        MainApplication.getInstance().getDataStore().setText_name(textState)
+                    if (textState == ""){
+                        Toast.makeText(context,"이름을 작성해주세요!", Toast.LENGTH_LONG).show()
                     }
-                    navController.navigate(SETUNIVERSITY) {
-                        navController.graph.startDestinationRoute?.let {
-                            popUpTo(it) { saveState = true }
+                    else{
+                        CoroutineScope(Dispatchers.IO).launch {
+                            MainApplication.getInstance().getDataStore().setText_name(textState)
                         }
-                        launchSingleTop = true
-                        restoreState = true
+                        navController.navigate(SETUNIVERSITY) {
+                            navController.graph.startDestinationRoute?.let {
+                                popUpTo(it) { saveState = true }
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
                     }
                 }
             ) {
-                Text(text = "확인")
+                Text(
+                    text = "확인",
+                    fontFamily = font_pt,
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 16.sp
+                )
             }
         }
     }
@@ -165,17 +177,12 @@ fun gallery(){
     }
 }
 
-
-@Composable
-fun profile_textfield(){
-
-}
-
 @Preview(showBackground = true)
 @Composable
 internal fun setprofile_Preview(){
-    //val navController = NavHostController
+    val navController = rememberNavController()
+    var context = LocalContext.current
     MukatlistTheme{
-        //profile()
+        profile(navController, context)
     }
 }

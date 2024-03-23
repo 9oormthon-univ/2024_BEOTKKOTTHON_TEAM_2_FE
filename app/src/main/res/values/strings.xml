@@ -7,4 +7,5 @@
     <string name="text_calendar">캘린더</string>
     <string name="text_mypage">마이페이지</string>
     <string name="Client_ID">690119309634-1dc3n0pnr79ghp9dj6iddj7dkfn0ar6s.apps.googleusercontent.com</string>
+    <string name = "default_notification_channel_id">eM1CAd5oTW6AQWVqoQnQ8z:APA91bG2DUSDLciG9MKncrBJbk_j-2JOw_8FckhKZatn7haQjnbOfth8kHE9w7Y_KbwUibejGqbeT6fj8vTTfKTqTtKAGpsoPiV2lQ_ud1C_4YlBNbgje6x7fJ43xCiHCpVTpDrgE0u4</string>
 </resources>

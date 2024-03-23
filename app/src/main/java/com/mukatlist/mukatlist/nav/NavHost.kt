@@ -1,5 +1,10 @@
 package com.mukatlist.mukatlist.nav
 
+import android.content.Context
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -24,31 +29,84 @@ import com.mukatlist.mukatlist.ui.theme.SETNAME
 import com.mukatlist.mukatlist.ui.theme.SETUNIVERSITY
 
 @Composable
-fun Navigation_Bottom(navController: NavHostController, startDestination: String) {
+fun Navigation_Bottom(navController: NavHostController, startDestination: String, context: Context) {
+    val time = 700
     NavHost(navController = navController, startDestination = startDestination) {
-        composable(BottomNavItems.Mukatlist.route) {
-            MukatlistScreen()
+        composable(route = BottomNavItems.Mukatlist.route,
+            enterTransition = {
+                fadeIn(animationSpec = tween(time))
+            },
+            exitTransition = {
+                fadeOut(animationSpec = tween(time))
+            },
+            popEnterTransition = {
+                fadeIn(animationSpec = tween(time))
+            },
+            popExitTransition = {
+                fadeOut(animationSpec = tween(time))
+
+            }
+        ) {
+            MukatlistScreen(context)
         }
-        composable(BottomNavItems.SearchMusteat.route) {
+        composable(
+            route = BottomNavItems.SearchMusteat.route,
+            enterTransition = {
+                fadeIn(animationSpec = tween(time))
+            },
+            exitTransition = {
+                fadeOut(animationSpec = tween(time))
+            },
+            popEnterTransition = {
+                fadeIn(animationSpec = tween(time))
+            },
+            popExitTransition = {
+                fadeOut(animationSpec = tween(time))
+            }
+        ) {
             SearchMusteatScreen()
         }
-        composable(BottomNavItems.Calendar.route) {
+        composable(
+            route = BottomNavItems.Calendar.route,
+            enterTransition = {
+                fadeIn(animationSpec = tween(time))
+            },
+            exitTransition = {
+                fadeOut(animationSpec = tween(time))
+            },
+            popEnterTransition = {
+                fadeIn(animationSpec = tween(time))
+            },
+            popExitTransition = {
+                fadeOut(animationSpec = tween(time))
+            }
+        ) {
             CalendarScreen()
         }
-        composable(BottomNavItems.MyPage.route) {
+        composable(
+            route = BottomNavItems.MyPage.route,
+            enterTransition = {
+                fadeIn(animationSpec = tween(time))
+            },
+            exitTransition = {
+                fadeOut(animationSpec = tween(time))
+            },
+            popEnterTransition = {
+                fadeIn(animationSpec = tween(time))
+            },
+            popExitTransition = {
+                fadeOut(animationSpec = tween(time))
+            }
+        ) {
             MyPageScreen()
         }
 
-        composable(TopNavItem.Top.route) {
-            MukatlistScreen()
-        }
-
-        composable(Top_MypageNavItem.Top.route) {
-            MukatlistScreen()
-        }
+//        composable(Top_MypageNavItem.Top.route) {
+//            MukatlistScreen()
+//        }
 
         composable(SETNAME) {
-            profile(navController)
+            profile(navController, context)
         }
         composable(SETUNIVERSITY) {
             set_university(navController)
@@ -62,30 +120,23 @@ fun Navigation_Bottom(navController: NavHostController, startDestination: String
     }
 
 }
-@Composable
-fun Navigation_Top(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = TopNavItem.Top.route) {
-        composable(TopNavItem.Top.route) {
-            MukatlistScreen()
-        }
-    }
-}
+
+//
+//@Composable
+//fun Navigation_Top_Mypage(navController: NavHostController) {
+//    NavHost(navController = navController, startDestination = Top_MypageNavItem.Top.route) {
+//        composable(Top_MypageNavItem.Top.route) {
+//            MukatlistScreen()
+//        }
+//    }
+//}
 
 @Composable
-fun Navigation_Top_Mypage(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Top_MypageNavItem.Top.route) {
-        composable(Top_MypageNavItem.Top.route) {
-            MukatlistScreen()
-        }
-    }
-}
-
-@Composable
-fun Navigation(navController: NavHostController) {
+fun Navigation(navController: NavHostController, context: Context) {
 
     NavHost(navController = navController, startDestination = SETNAME) {
         composable(SETNAME) {
-            profile(navController)
+            profile(navController, context)
         }
         composable(SETUNIVERSITY) {
             set_university(navController)

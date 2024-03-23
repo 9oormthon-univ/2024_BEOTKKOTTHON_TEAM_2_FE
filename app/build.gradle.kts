@@ -113,17 +113,27 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
     implementation("com.google.android.gms:play-services-auth:21.0.0")
 
-    //val springfox_swagger = "1.1.1"
-    // Swagger
-    //implementation("io.springfox:springfox-swagger2:${springfox_swagger}")
-
+    // datastore
     implementation ("androidx.datastore:datastore-preferences:1.0.0")
     // optional - RxJava2 support
     implementation ("androidx.datastore:datastore-preferences-rxjava2:1.0.0")
     // optional - RxJava3 support
     implementation ("androidx.datastore:datastore-preferences-rxjava3:1.0.0")
 
-
     // web view
     implementation( "com.google.accompanist:accompanist-webview:0.24.13-rc")
+
+    //okhttp
+    implementation("com.squareup.okhttp3:okhttp:3.6.0")
+    // retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.6.4")
+    // Gson
+    implementation("com.squareup.retrofit2:converter-gson:2.6.4")
+    //scalars
+    implementation("com.squareup.retrofit2:converter-scalars:2.6.4")
+
+    // firebase
+    implementation("com.google.firebase:firebase-messaging-ktx")
+    implementation("com.google.firebase:firebase-analytics")
+    implementation(platform("com.google.firebase:firebase-bom:32.1.0"))
 }

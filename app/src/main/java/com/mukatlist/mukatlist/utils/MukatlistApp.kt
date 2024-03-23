@@ -1,6 +1,7 @@
 package com.mukatlist.mukatlist.utils
 
 import android.app.Activity
+import android.content.Context
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -18,16 +19,18 @@ import com.mukatlist.mukatlist.ui.theme.MUKATLIST
 import com.mukatlist.mukatlist.ui.theme.MukatlistTheme
 
 @Composable
-fun MukatlistApp() {
+fun MukatlistApp(context: Context) {
     val navController = rememberNavController()
     mukatNavi(
-        navController = navController
+        navController = navController,
+        context
     )
 }
 
 @Composable
 fun mukatNavi(
-    navController: NavHostController
+    navController: NavHostController,
+    context: Context
 ){
     Scaffold(
         bottomBar = {
@@ -45,7 +48,7 @@ fun mukatNavi(
                     .padding(it)
             )
             {
-                Navigation_Bottom(navController = navController, MUKATLIST)
+                Navigation_Bottom(navController = navController, MUKATLIST, context)
             }
         }
     )
@@ -55,6 +58,6 @@ fun mukatNavi(
 @Composable
 fun mukatlistPreview(){
     MukatlistTheme {
-        MukatlistApp()
+        //MukatlistApp()
     }
 }

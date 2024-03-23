@@ -7,6 +7,9 @@ import com.mukatlist.mukatlist.ui.theme.MukatlistTheme
 @Composable
 fun MyPageScreen(){
 
+
+
+
 }
 
 @Preview(showBackground = true)
